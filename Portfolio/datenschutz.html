@@ -69,7 +69,7 @@
             [Straße und Hausnummer]<br />
             [PLZ] [Stadt]<br />
             Deutschland<br /><br />
-            E-Mail: <a href="mailto:sydneyadler05@gmail.com">sydneyadler05@gmail.com</a>
+            E-Mail: <a href="mailto:sydneyadlerdev@gmail.com">sydneyadlerdev@gmail.com</a>
           </address>
         </div>
 
@@ -195,7 +195,7 @@
           </p>
           <p>
             Zur Ausübung deiner Rechte wende dich bitte an:
-            <a href="mailto:sydneyadler05@gmail.com">sydneyadler05@gmail.com</a>
+            <a href="mailto:sydneyadlerdev@gmail.com">sydneyadlerdev@gmail.com</a>
           </p>
         </div>
 
@@ -256,7 +256,7 @@
           <h4 class="footer__nav-title">Rechtliches</h4>
           <ul class="footer__nav-list">
             <li><a href="impressum.html">Impressum</a></li>
-            <li><a href="datenschutz.html" style="color: var(--neon-cyan)">Datenschutz</a></li>
+            <li><a href="datenschutz.html" style="color: var(--blue-primary)">Datenschutz</a></li>
           </ul>
         </div>
       </div>
@@ -274,8 +274,8 @@
       const closeBtn = document.getElementById('mobile-overlay-close');
       const links    = document.querySelectorAll('.mobile-overlay__link');
       if (!toggle || !overlay) return;
-      const open  = () => { overlay.classList.add('open');    toggle.classList.add('open');    document.body.style.overflow = 'hidden'; };
-      const close = () => { overlay.classList.remove('open'); toggle.classList.remove('open'); document.body.style.overflow = '';       };
+      const open  = () => { overlay.classList.add('open');    toggle.classList.add('open');    toggle.setAttribute('aria-expanded', 'true');  document.body.style.overflow = 'hidden'; };
+      const close = () => { overlay.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = '';       };
       toggle.addEventListener('click', () => overlay.classList.contains('open') ? close() : open());
       if (closeBtn) closeBtn.addEventListener('click', close);
       links.forEach(l => l.addEventListener('click', close));
