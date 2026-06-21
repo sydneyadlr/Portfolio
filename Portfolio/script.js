@@ -1,20 +1,14 @@
 /* =============================================
-   EMAILJS KONFIGURATION
+   N8N WEBHOOK KONFIGURATION
    ============================================= */
 
-const EMAILJS_SERVICE_ID  = 'service_djw10nq';
-const EMAILJS_TEMPLATE_ID = 'template_3zj80dt';
-const EMAILJS_PUBLIC_KEY  = 'zQnowrSWxXXv7QVNM';
+const N8N_WEBHOOK_URL = 'https://sydney-adler.app.n8n.cloud/webhook/kundenanfrage';
 
 /* =============================================
    SYDNEY ADLER WEB SOLUTIONS — PORTFOLIO JS
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
-  }
-
   initNavbar();
   initMobileMenu();
   initScrollReveal();
@@ -114,7 +108,7 @@ function initSkillBars() {
 }
 
 /* =============================================
-   KONTAKTFORMULAR — EmailJS Integration
+   KONTAKTFORMULAR — n8n Webhook Integration
    ============================================= */
 function initContactForm() {
   const form = document.getElementById('contact-form');
@@ -200,20 +194,22 @@ function initContactForm() {
 
     showLoading();
 
-    if (typeof emailjs === 'undefined') {
-      resetBtn();
-      if (errorMsg) errorMsg.classList.add('visible');
-      return;
-    }
-
-    const templateParams = {
-      from_name:  document.getElementById('name').value.trim(),
-      from_email: document.getElementById('email').value.trim(),
-      subject:    document.getElementById('subject').value.trim() || 'Neue Anfrage',
-      message:    document.getElementById('message').value.trim(),
+    const payload = {
+      name:    document.getElementById('name').value.trim(),
+      email:   document.getElementById('email').value.trim(),
+      subject: document.getElementById('subject').value.trim() || 'Neue Anfrage',
+      message: document.getElementById('message').value.trim(),
     };
 
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Webhook-Fehler: ' + res.status);
+        return res.json();
+      })
       .then(() => {
         resetBtn();
         form.reset();
@@ -223,7 +219,7 @@ function initContactForm() {
         }
       })
       .catch(error => {
-        console.error('EmailJS Fehler:', error);
+        console.error('Webhook Fehler:', error);
         resetBtn();
         if (errorMsg) {
           errorMsg.classList.add('visible');
