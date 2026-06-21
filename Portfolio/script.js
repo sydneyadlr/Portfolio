@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initSmoothScroll();
   initActiveNavLink();
+  initFaq();
 });
 
 /* =============================================
@@ -246,6 +247,33 @@ function initSmoothScroll() {
       const navbarHeight = document.getElementById('navbar')?.offsetHeight || 64;
       const top = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
       window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+}
+
+/* =============================================
+   FAQ — Accordion
+   ============================================= */
+function initFaq() {
+  const items = document.querySelectorAll('.faq-item');
+  if (!items.length) return;
+
+  items.forEach(item => {
+    const btn = item.querySelector('.faq-item__question');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('faq-item--open');
+
+      items.forEach(i => {
+        i.classList.remove('faq-item--open');
+        i.querySelector('.faq-item__question')?.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('faq-item--open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 }
