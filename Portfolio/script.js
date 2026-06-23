@@ -5,7 +5,7 @@
 const N8N_WEBHOOK_URL = 'https://sydney-adler.app.n8n.cloud/webhook/kundenanfrage';
 
 /* =============================================
-   SYDNEY ADLER WEB SOLUTIONS — PORTFOLIO JS
+   SAW – Sydney Adler Webentwicklung — Portfolio JS
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
