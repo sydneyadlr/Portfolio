@@ -1376,7 +1376,7 @@ input, textarea { font-family: inherit; }
   .navbar__toggle { display: flex; }
 
   .hero { align-items: flex-start; }
-  .hero__content { padding-top: 148px; }
+  .hero__content { padding-top: 74px; }
   .hero__title   { font-size: clamp(2rem, 9vw, 3.2rem); }
   .hero__buttons { flex-direction: column; align-items: flex-start; }
   .hero__stats   { gap: 20px; }
